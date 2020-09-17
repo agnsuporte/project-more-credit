@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import Routes from "./services/routes/Routes";
 import Bar from "./components/bar/Bar";
-
-import logo from "./assets/Logo_Netmore.png";
+import { isAuthenticated } from "./services/auth";
 
 import "./App.css";
 
-const menu = [{ _id: 1, link: "/main", description: "Main" }];
-
 function App() {
+  const [logged, setLogged] = useState(isAuthenticated());
+  const isLogged = () => setLogged(isAuthenticated());
+
   return (
     <BrowserRouter>
-      <Bar listMenu={menu} appLogo={logo} />
-      <main style={{marginTop: "75px"}}>
-        <Routes />
+      <main style={{ marginTop: "75px" }}>
+        <Bar logged={logged} isLogged={isLogged} />
+        <Routes logged={logged} isLogged={isLogged} />
       </main>
     </BrowserRouter>
   );

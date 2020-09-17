@@ -1,0 +1,44 @@
+/*=============== 
+MAIN
+==================*/
+
+#main {
+  padding: 30px 50px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 6rem;
+  padding: 4rem 1rem;
+
+  background-color: rgb(255, 255, 255);
+}
+
+.main-search__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main-search__header h1 {
+  text-transform: uppercase;
+  color: #888;
+}
+
+.main-search__input {
+  height: 42px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 40%;
+  padding: 0 10px;
+  font-size: 16px;
+}

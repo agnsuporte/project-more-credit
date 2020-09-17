@@ -1,23 +1,41 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { PageCreditForm, NotFound } from "../../pages";
+import ServicesRoutesPrivate from "./RoutesPrivate";
 
-// import ServicesRoutesPrivate from "./RoutesPrivate";
+import {
+  MainPage,
+  CreditFormPage,
+  SigninPage,
+  NotFoundPage,
+} from "../../pages";
 
 const ServicesRoutes = (props) => {
-  // const { isAuthed, logged } = props;
+  const { isLogged, logged } = props;
 
   return (
     <Switch>
-      <Route exact path="/" render={() => <PageCreditForm />} />
+      <Route
+        exact
+        path="/"
+        render={(props) => (
+          <CreditFormPage {...props} logged={logged} isLogged={isLogged} />
+        )}
+      />
 
-      {/* <ServicesRoutesPrivate
-          path="/here"
-          component={PageLocation}
-          isAuthed={isAuthed}
-        /> */}
+      <Route
+        path="/login"
+        render={(props) => (
+          <SigninPage {...props} logged={logged} isLogged={isLogged} />
+        )}
+      />
 
-      <Route path="*" component={NotFound} />
+      <ServicesRoutesPrivate
+        path="/main"
+        component={MainPage}
+        isLogged={isLogged}
+      />
+
+      <Route path="*" component={NotFoundPage} />
     </Switch>
   );
 };

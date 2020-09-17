@@ -1,12 +1,15 @@
 import JWT from "jsonwebtoken";
 
-export const TOKEN_KEY = "@Gn-Token";
+export const TOKEN_KEY = "@Gn-Token-Net-More";
 
 export const logout = () => localStorage.clear();
 
-export const login = (data) => {
-  const { token } = data;
+export const setToken = (token) => {
   localStorage.setItem(TOKEN_KEY, token);
+};
+
+export const isAuthenticated = () => {
+  return localStorage.getItem(TOKEN_KEY) !== null;
 };
 
 export const getToken = () => {
@@ -26,8 +29,4 @@ export const getUserName = () => {
 export const getUserEmail = () => {
   const token = JWT.decode(getToken());
   return token.email ? token : null;
-};
-
-export const isAuthenticated = () => {
-  return localStorage.getItem(TOKEN_KEY) !== null;
 };

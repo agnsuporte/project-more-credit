@@ -14,14 +14,14 @@ const renderDragMessage = (isdragactive, isdragreject) => {
 
   if (isdragreject) {
     return (
-      <p className="UploadMessage" style={{ color: "#e57878"}}>
+      <p className="UploadMessage" style={{ color: "#e57878" }}>
         Arquivo não suportado
       </p>
     );
   }
 
   return (
-    <p className="UploadMessage" style={{ color: "#78e5d5"}}>
+    <p className="UploadMessage" style={{ color: "#78e5d5" }}>
       Solte o arquivo aqui
     </p>
   );
@@ -29,17 +29,19 @@ const renderDragMessage = (isdragactive, isdragreject) => {
 
 const Upload = (props) => {
   const { onUpload } = props;
+  const accepts = ["image/jpeg", "image/pjpeg", "image/png", "image/gif"];
 
   return (
-    <Dropzone accept="image/*" multiple={false} onDropAccepted={onUpload}>
+    <Dropzone accept={accepts} multiple={false} onDropAccepted={onUpload}>
       {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
         <div
-          className="drop-container" style={{borderColor: ""}}
+          className="drop-container"
+          style={{ borderColor: "" }}
           {...getRootProps()}
           is-drag-active={isDragActive.toString()}
           is-drag-reject={isDragReject.toString()}
         >
-          <input {...getInputProps()}  />
+          <input {...getInputProps()} />
           {renderDragMessage(isDragActive, isDragReject)}
         </div>
       )}
@@ -48,5 +50,3 @@ const Upload = (props) => {
 };
 
 export default Upload;
-
-

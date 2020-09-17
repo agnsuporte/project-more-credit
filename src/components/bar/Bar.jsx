@@ -1,10 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { logout } from "../../services/auth";
+
+import logo from "../../assets/Logo_Netmore.png";
 
 import "./bar.css";
 
+const menu = [{ _id: 2, link: "/main", description: "Main" }];
+
 const Bar = (props) => {
-  const { listMenu, appLogo } = props;
+  const { isLogged, logged } = props;
+
+  const onClickLogged = () => {
+    logout();
+    isLogged();
+    return;
+  };
+
+  const Logout = () => {
+    return (
+      <li>
+        <Link to="/" onClick={onClickLogged}>
+          Sair
+        </Link>
+      </li>
+    );
+  };
+
+  const Login = () => {
+    return (
+      <li>
+        <NavLink to="/login" activeClassName="active-item">
+          Fazer Login
+        </NavLink>
+      </li>
+    );
+  };
 
   const toggleClickMenu = () => {
     document.querySelector(".toggle").classList.toggle("active");
@@ -14,25 +45,23 @@ const Bar = (props) => {
   return (
     <nav>
       <Link to="/" className="logo">
-        {!appLogo && "LOGO"}
-        {appLogo && <img src={appLogo} alt="logo" />}
+        <img src={logo} alt="logo" />
       </Link>
 
       <div className="toggle" onClick={toggleClickMenu}></div>
 
       <ul className="menu">
-        {listMenu.map((item) => {
+        {menu.map((item) => {
           return (
             <li className="" key={item._id}>
-              <a href={item.link} > {item.description} </a>
+              <NavLink to={item.link} activeClassName="active-item">
+                {item.description}{" "}
+              </NavLink>
             </li>
           );
         })}
+        {logged ? <Logout /> : <Login />}
       </ul>
-
-      {/* <a href="/" className="lang">
-        Pb
-      </a> */}
     </nav>
   );
 };

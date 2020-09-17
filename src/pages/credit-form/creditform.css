@@ -18,7 +18,6 @@ section.credit {
    flex-direction: column;
    align-items: center;
    justify-content: center;
-
 }
 
 span {
@@ -32,7 +31,7 @@ span {
 .container form {
    width: 90%;
    background-color: rgb(255, 255, 255);
-   padding: 1rem; /*preenchimento*/
+   padding: 2rem 3.3rem; /*preenchimento*/
    margin: 30px;
    border-radius: 8px;
 }
@@ -55,6 +54,7 @@ span {
 }
 
 .container form legend h2 {
+   margin-bottom: 3rem;
    font-size: 20px;
 }
 

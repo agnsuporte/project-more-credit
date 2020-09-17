@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination .item {
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  color: #3498db;
+  padding: 8px 10px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.pagination .active {
+  color: white;
+  background-color: #4caf50;
+}
+
+.pagination .item:hover:not(.active) {
+  color: white;
+  background-color: #3498db;
+}
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
+}

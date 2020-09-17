@@ -36,6 +36,14 @@ nav {
 .toggle {
    display: none;
 }
+
+.active-item {
+   background-color: #292929;
+   color: #fff !important;
+   font-weight: bold;
+   transition: all ease 0.4s;
+}
+
 .active a,
 .menu li a:hover {
    background-color: #292929;
@@ -44,26 +52,22 @@ nav {
    transition: all ease 0.4s;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
    .toggle {
+      font-size: 25px;
       display: block;
    }
 
-   .svg-inline--fa {
-      font-size: 2rem;
-   }
-
    .toggle:before {
-      display: none;
-      font-family: "Font Awesome 5 Solid";
       content: "\f0c9";
-
+      font-family: fontAwesome;
       line-height: 0px;
       margin-left: -30px;
    }
    .toggle.active:before {
       content: "\f00d" !important;
    }
+
    nav {
       padding: 10px 30px;
    }

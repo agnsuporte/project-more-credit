@@ -8,7 +8,7 @@ import Loagin from "../../components/Modal/Loading";
 import Upload from "../../components/upload/Upload";
 import Preview from "../../components/upload/Previewer";
 
-// import api from "../../services/api";
+import api from "../../services/api";
 
 import "./creditform.css";
 
@@ -59,40 +59,70 @@ const PageCreditForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoader(true);
     const data = { ...values };
 
-    setTimeout(() => {
-      console.log(data);
-      setLoader(false);
-      onClickOpenModal();
-      document.getElementById("credit-form").reset();
-      setValues((prev) => ({ ...prev, imagePassportOrRg: false }));
-      setValues((prev) => ({ ...prev, imageSelfieWithPassport: false }));
-      document.getElementById("fullName").focus();
-    }, 4000);
+    if (data.imagePassportOrRg && data.imageSelfieWithPassport) {
+      
+      setLoader(true);
+      let formData = new FormData();
 
-    // api
-    //   .post("/questionaddress/new", data)
-    //   .then((resp) => {
-    //     if (!resp.data.error) {
-    //       setMessage("Obrigado por participar!");
-    //     } else {
-    //       setErro(true);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setErro(true);
-    //   });
+      formData.append("fullName", data.fullName);
+      formData.append("email", data.email);
+      formData.append("phone", data.phone);
+      formData.append("dateOfBirth", data.dateOfBirth);
+      formData.append("socialNetwork", data.socialNetwork);
+      formData.append("rg", data.rg);
+      formData.append("cpf", data.cpf);
+      formData.append("passportNumber", data.passportNumber);
+      formData.append("streetOrAvenue", data.streetOrAvenue);
+      formData.append("city", data.city);
+      formData.append("state", data.state);
+      formData.append("zipCode", data.zipCode);
+      formData.append("country", data.country);
+      formData.append("deviceName", data.deviceName);
+      formData.append("diviceURL", data.diviceURL);
+      formData.append("inputValue", data.inputValue);
+      formData.append("numberOfWeeks", data.numberOfWeeks);
+      formData.append("ownersAccountName", data.ownersAccountName);
+      formData.append("numberAccount", data.numberAccount);
+      formData.append("sortCodeAccount", data.sortCodeAccount);
+      formData.append("imagePassportOrRg", data.imagePassportOrRg[0].file);
+      formData.append(
+        "imageSelfieWithPassport",
+        data.imageSelfieWithPassport[0].file
+      );
 
-    return;
+      api
+        .post("/cred/new", formData)
+        .then((resp) => {
+          setLoader(false);
+          onClickOpenModal();
+          document.getElementById("credit-form").reset();
+          setValues((prev) => ({ ...prev, imagePassportOrRg: false }));
+          setValues((prev) => ({ ...prev, imageSelfieWithPassport: false }));
+          document.getElementById("fullName").focus();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (!data.imagePassportOrRg) {
+      window.alert('Foto do "Passaporte ou RG" é obrigatório!');
+    } else if (!data.imageSelfieWithPassport) {
+      window.alert('Seu "Self com Passaporte" é obrigatório!');
+    }
+
+    return null;
   };
 
   return (
     <section className="credit">
-      
       <div className="container">
-        <form onSubmit={handleSubmit} id="credit-form" enctype="multipart/form-data">
+        <form
+          onSubmit={handleSubmit}
+          id="credit-form"
+          encType="multipart/form-data"
+        >
+
           <fieldset>
             <legend>
               <h2>Crédito NetMore </h2>
@@ -258,7 +288,7 @@ const PageCreditForm = () => {
                 {/* <input
                   className="upload-photo"
                   type="file"
-                  name="passportOrRgURL selfieWithPassportURL"
+                  name="imagePassportOrRg"
                   accept="image/png, image/jpeg"
                   onChange={handleChange}
                   required
@@ -278,15 +308,6 @@ const PageCreditForm = () => {
                 {values.imageSelfieWithPassport && (
                   <Preview files={values.imageSelfieWithPassport} />
                 )}
-
-                {/* <input
-                  className="upload-photo"
-                  type="file"
-                  name="selfieWithPassportURL"
-                  accept="image/png, image/jpeg"
-                  onChange={handleChange}
-                  required
-                /> */}
               </div>
             </div>
           </fieldset>
@@ -377,6 +398,7 @@ const PageCreditForm = () => {
               )}
             </div>
           </fieldset>
+        
         </form>
       </div>
 
@@ -387,6 +409,7 @@ const PageCreditForm = () => {
           onClickClose={onClickCloseModal}
         />
       </Modal>
+
     </section>
   );
 };

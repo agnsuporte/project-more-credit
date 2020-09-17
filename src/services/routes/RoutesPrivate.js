@@ -4,24 +4,21 @@ import { Route, Redirect } from "react-router-dom";
 import api from "../api";
 import { getToken, isAuthenticated, logout } from "../auth";
 
-
-const ServicesRoutesPrivate = ({ component: Component, isAuthed, ...rest }) => {
-  let valided = isAuthenticated();
+const ServicesRoutesPrivate = ({ component: Component, isLogged, ...rest }) => {
+  let authenticated = isAuthenticated();
   const token = getToken();
 
   if (token) {
     api
-      .post("/user/token", { token })
-      .then(function (response) {
-        const resp = response.data.verify;
-
-        if (!resp) {
+      .get("/api/v1/user/token")
+      .then(function (resp) {
+        if (resp.err) {
           logout();
-          isAuthed();
-          valided = resp;
+          isLogged();
+          authenticated = false;
         }
 
-        return valided;
+        return authenticated;
       })
       .catch(function (error) {
         console.log(error);
@@ -33,12 +30,12 @@ const ServicesRoutesPrivate = ({ component: Component, isAuthed, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        valided ? (
+        authenticated ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: "/signin",
+              pathname: "/login",
               state: {
                 from: props.location,
                 redirectOnAuthenticated: true,
