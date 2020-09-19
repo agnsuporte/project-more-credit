@@ -85,3 +85,42 @@
 .col50 {
    width: 50%;
 }
+
+.message-modal__title {
+   font-size: 2.5rem;
+   color: red;
+   margin-top: 10px;
+   margin-bottom: 15px;
+   text-align: center;
+}
+
+.message-motal__text {
+   color: #2c3e50;
+   text-align: center;
+   font-size: 16px;
+   padding: 10px;
+}
+
+.message-modal-buttons {
+   display: flex;
+   justify-content: center;
+}
+
+.message-modal__button {
+   text-decoration: none;
+   padding: 10px 20px;
+   font-size: 1.9rem;
+   color: white;
+   font-weight: bold;
+
+   height: 40px;
+   background-color: #415886;
+   border-radius: 8px;
+   border: 0;
+   transition: background-color 400ms;
+   margin-bottom: 15px;
+}
+
+.message-modal__button:hover {
+   opacity: 0.8;
+}

@@ -1,30 +1,16 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import api from "../api";
+import getChekToken from "../chektoken";
 import { getToken, isAuthenticated, logout } from "../auth";
 
-const ServicesRoutesPrivate = ({ component: Component, isLogged, ...rest }) => {
+const ServicesRoutesPrivate = ({ component: Component, ...rest }) => {
   let authenticated = isAuthenticated();
-  const token = getToken();
 
-  if (token) {
-    api
-      .get("/api/v1/user/token")
-      .then(function (resp) {
-        if (resp.err) {
-          logout();
-          isLogged();
-          authenticated = false;
-        }
-
-        return authenticated;
-      })
-      .catch(function (error) {
-        console.log(error);
-        return false;
-      });
-  }
+  // authenticated = async () => {
+  //   console.log("É sério?");
+  //   return await getChekToken();
+  // };
 
   return (
     <Route

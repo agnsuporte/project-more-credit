@@ -62,7 +62,6 @@ const PageCreditForm = () => {
     const data = { ...values };
 
     if (data.imagePassportOrRg && data.imageSelfieWithPassport) {
-      
       setLoader(true);
       let formData = new FormData();
 
@@ -93,7 +92,7 @@ const PageCreditForm = () => {
       );
 
       api
-        .post("/cred/new", formData)
+        .post("/api/v1/cred/new", formData)
         .then((resp) => {
           setLoader(false);
           onClickOpenModal();
@@ -122,7 +121,6 @@ const PageCreditForm = () => {
           id="credit-form"
           encType="multipart/form-data"
         >
-
           <fieldset>
             <legend>
               <h2>Crédito NetMore </h2>
@@ -398,7 +396,6 @@ const PageCreditForm = () => {
               )}
             </div>
           </fieldset>
-        
         </form>
       </div>
 
@@ -409,7 +406,6 @@ const PageCreditForm = () => {
           onClickClose={onClickCloseModal}
         />
       </Modal>
-
     </section>
   );
 };

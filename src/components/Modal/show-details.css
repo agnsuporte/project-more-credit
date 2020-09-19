@@ -1,0 +1,68 @@
+.detail-modal__title {
+  font-size: 2.5rem;
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.detail-modal__body {
+  font-size: 1.5rem;
+}
+
+.detail-modal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.detail-modal__button {
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 1.9rem;
+  color: white;
+  font-weight: bold;
+
+  height: 40px;
+  background-color: #415886;
+  border-radius: 8px;
+  border: 0;
+  transition: background-color 400ms;
+  margin-bottom: 15px;
+}
+
+.detail-modal__button:hover {
+  opacity: 0.8;
+}
+
+section.show-details {
+  font-size: 14ps;
+  padding: 15px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-text {
+  width: 50%;
+}
+
+.article {
+  margin-bottom: 20px;
+}
+
+.article h2 {
+  margin-bottom: 15px;
+}
+
+.foto {
+  width: 35%;
+  height: 270px;
+
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: rgb(116, 122, 160);
+}
+
+.bloco-endereco {
+  margin-bottom: 20px;
+}

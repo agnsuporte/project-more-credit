@@ -1,43 +1,45 @@
 .message-modal {
-   width: 100%;
-   height: 100%;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   color: rgb(0, 38, 255);
- }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 38, 255);
+}
 
- .message-modal__title {
-   font-size: 2.5rem;
-   color: red;
-   margin-top: 15px;
-   margin-bottom: 25px;
- }
+.message-modal__title {
+  font-size: 2.5rem;
+  color: red;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
 
- .message-modal__body{
-   font-size: 1.5rem;
-   margin-top: 10px;
-   margin-bottom: 25px;
- }
+.message-modal__body {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
 
- .message-modal__button {
-   text-decoration: none;
-   padding: 10px 20px;
-   font-size: 1.9rem;
-   color: white;
-   font-weight: bold;
- 
-   height: 40px;
-   background-color: #415886;
-   border-radius: 8px;
-   border: 0;
-   transition: background-color 400ms;
- }
- 
- .message-modal__button:hover {
-   opacity: 0.8;
- }
- 
+.message-modal__button {
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 1.9rem;
+  color: white;
+  font-weight: bold;
 
- 
+  height: 40px;
+  background-color: #415886;
+  border-radius: 8px;
+  border: 0;
+  transition: background-color 400ms;
+}
+
+.message-modal__button:hover {
+  opacity: 0.8;
+}
+
+section.detail {
+  font-size: 14ps;
+  padding: 30px;
+}

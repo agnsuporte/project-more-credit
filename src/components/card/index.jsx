@@ -1,7 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 import "./card.css";
+
+import Modal from "../Modal/Modal";
+import ShowDetails from "../Modal/ShowDetails";
 
 const Card = (props) => {
   const {
@@ -17,6 +19,15 @@ const Card = (props) => {
     // bankDetails,
     creditAccepted,
   } = props.data;
+
+  const [openModal, setOpenModal] = useState(false);
+  const [openMessageModal, setOpenMessageModal] = useState(false);
+
+  const openShowMessageModal = () => setOpenMessageModal(true);
+  const openCloseMessageModal = () => setOpenMessageModal(false);
+
+  const onClickCloseModal = () => setOpenModal(false);
+  const onClickOpenModal = () => setOpenModal(true);
 
   return (
     <div className="credit-card">
@@ -40,12 +51,28 @@ const Card = (props) => {
             <button
               type="button"
               className="credit-card__link"
-              onClick={() => console.log(fullName)}
+              onClick={onClickOpenModal}
             >
-              {creditAccepted ? "Notificado" : "Notificar"}
+              Preview
             </button>
 
-            <a
+            <button
+              type="button"
+              className="credit-card__link"
+              onClick={openShowMessageModal}
+            >
+              Abrir Proposta
+            </button>
+
+            <button
+              type="button"
+              className="credit-card__link"
+              onClick={openShowMessageModal}
+            >
+              Excluir
+            </button>
+
+            {/* <a
               href={"/"}
               target="_blank"
               rel="noopener noreferrer"
@@ -55,10 +82,38 @@ const Card = (props) => {
             </a>
             <Link to={`/edit/${1}`} className="credit-card__link">
               Excluir
-            </Link>
+            </Link> */}
           </div>
         </footer>
       </div>
+      <Modal isOpen={Boolean(openModal)} onClickClose={onClickCloseModal}>
+        <ShowDetails
+          data={props.data}
+          onClickClose={onClickCloseModal}
+        ></ShowDetails>
+      </Modal>
+      <Modal
+        isOpen={Boolean(openMessageModal)}
+        onClickClose={openCloseMessageModal}
+      >
+        <h2 className="message-modal__title">
+          Muito obrigado por esta oportunidade!
+        </h2>
+
+        <div className="message-motal__text">
+          <p>Este recurso não está disponível</p>
+        </div>
+
+        <div className="message-modal-buttons">
+          <button
+            type="button"
+            className="message-modal__button"
+            onClick={openCloseMessageModal}
+          >
+            Ok, Obrigado!
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

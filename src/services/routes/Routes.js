@@ -24,9 +24,7 @@ const ServicesRoutes = (props) => {
 
       <Route
         path="/login"
-        render={(props) => (
-          <SigninPage {...props} logged={logged} isLogged={isLogged} />
-        )}
+        render={(props) => <SigninPage {...props} isLogged={isLogged} />}
       />
 
       <ServicesRoutesPrivate

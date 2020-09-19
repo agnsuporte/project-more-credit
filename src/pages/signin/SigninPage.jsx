@@ -2,21 +2,21 @@ import React, { useState, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { setToken } from "../../services/auth";
-import api from "../../services/api";
+import getSignin from "../../services/signin";
 
 import "./signin.css";
 
 function PageSignin(props) {
   const history = useHistory();
-  const elEmail = useRef(null);
+  const elEmai = useRef(null);
   const elPass = useRef(null);
-
-  const { isLogged, logged, location } = props;
 
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isLogged, location } = props;
 
   const handleFocus = (e) => {
     if (email && password) {
@@ -33,42 +33,29 @@ function PageSignin(props) {
     if (!email || !password) {
       if (!email) {
         setMessage("Email is required");
-        elEmail.current.focus();
+        elEmai.current.focus();
       } else {
         setMessage("Password is required");
         elPass.current.focus();
       }
-
-      return false;
     } else {
       setMessage("");
       setLoading(true);
-      await api
-        .get("/api/v1/login", {
-          auth: {
-            username: email,
-            password: password,
-          },
-        })
-        .then(async (resp) => {
-          if (!resp.data.err) {
-            await setToken(resp.data.token);
-            await isLogged();
 
-            if (logged) {
-              if (location.state) {
-                return history.push(location.state.from);
-              }
-              return history.push("/");
-            }
-          }
-          setLoading(false);
-          setMessage(resp.data.message);
-        })
-        .catch((err) => {
-          console.log("@GnErr =--> ", err);
-        });
-      setLoading(false);
+      const signin = await getSignin(email, password, "/api/v1/login");
+
+      if (!signin.err) {
+        setToken(signin.token);
+        isLogged();
+
+        if (location.state) {
+          return history.push(location.state.from);
+        }
+        return history.push("/");
+      } else {
+        setLoading(false);
+        setMessage(signin.message);
+      }
     }
     return false;
   };
@@ -79,7 +66,7 @@ function PageSignin(props) {
         <form onSubmit={submitHandler}>
           <ul className="form-container__login">
             <li>
-              <h2>Faça Login</h2>
+              <h2>Login</h2>
             </li>
             <li className="message">
               {loading && <div>Loading...</div>}
@@ -93,7 +80,7 @@ function PageSignin(props) {
                     type="email"
                     name="email"
                     id="email"
-                    ref={elEmail}
+                    ref={elEmai}
                     onFocus={handleFocus}
                     onChange={(e) => setEmail(e.target.value)}
                     autoFocus
@@ -121,7 +108,7 @@ function PageSignin(props) {
                 Entrar
               </button>
             </li>
-            <li>É novo aqui?</li>
+            <li>Are you new here?</li>
             <li>
               <Link to="/login" className="button__login secondary text-center">
                 Crie sua conta!

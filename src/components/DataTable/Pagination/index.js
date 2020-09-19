@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-// import div from "react-bootstrap/div";
 
 import "./pagination.css";
 
@@ -12,26 +11,33 @@ const PaginationComponent = ({
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    if (total > 0 && itemsPerPage > 0)
+    if (total > 0 && itemsPerPage > 0) {
       setTotalPages(Math.ceil(total / itemsPerPage));
+    }
   }, [total, itemsPerPage]);
 
   const paginationItems = useMemo(() => {
     const pages = [];
 
-    for (let i = 1; i <= totalPages; i++) {
-      const activePage = i === currentPage;
-      pages.push(
-        <button
-          type="button"
-          className={activePage ? "item active" : "item"}
-          key={i}
-          onClick={() => onPageChange(i)}
-        >
-          {i}
-        </button>
-      );
-    }
+    pages.push(
+      <span className={"pages"} key="01xyz-54">
+        Pag. {currentPage} de {totalPages}
+      </span>
+    );
+
+    // for (let i = 1; i <= totalPages; i++) {
+    //   const activePage = i === currentPage;
+    //   pages.push(
+    //     <button
+    //       type="button"
+    //       className={activePage ? "item active" : "item"}
+    //       key={i}
+    //       onClick={() => onPageChange(i)}
+    //     >
+    //       {i}
+    //     </button>
+    //   );
+    // }
 
     return pages;
   }, [totalPages, currentPage, onPageChange]);

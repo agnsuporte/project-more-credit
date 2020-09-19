@@ -1,33 +1,34 @@
 import React, { useEffect, useState, useMemo } from "react";
-
+import { Redirect } from "react-router-dom";
 import api from "../../services/api";
 import { Pagination, Search } from "../../components/DataTable";
-import { Card } from "../../components";
+import { Card, FullLoad } from "../../components";
 
 import "./main.css";
 
 const MainPage = (props) => {
   const [credits, setCredits] = useState([]);
-  // const [loader, showLoader, hideLoader] = useFullPageLoader();
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState({ field: "", order: "" });
+  const [loader, setLoader] = useState(false);
+  // const [sorting, setSorting] = useState({ field: "", order: "" });
 
   const ITEMS_PER_PAGE = 5;
 
-  const getData = () => {
-    api
-      .get("/api/v1/cred")
-      .then((resp) => {
-        setCredits(resp.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
+    setLoader(true);
+    const getData = async () => {
+      await api
+        .get("/api/v1/cred")
+        .then((resp) => {
+          setCredits(resp.data);
+          setLoader(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     getData();
   }, []);
 
@@ -45,19 +46,23 @@ const MainPage = (props) => {
     setTotalItems(computedCredits.length);
 
     //Sorting credits
-    if (sorting.field) {
-      const reversed = sorting.order === "asc" ? 1 : -1;
-      computedCredits = computedCredits.sort(
-        (a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field])
-      );
-    }
+    // if (sorting.field) {
+    //   const reversed = sorting.order === "asc" ? 1 : -1;
+    //   computedCredits = computedCredits.sort(
+    //     (a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field])
+    //   );
+    // }
 
     //Current Page slice
     return computedCredits.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
-  }, [credits, currentPage, search, sorting]);
+  }, [credits, currentPage, search]); //sorting]);
+
+  if (loader) {
+    return <FullLoad />;
+  }
 
   return (
     <section id="main" className="main">
