@@ -1,8 +1,8 @@
 /*=============== 
-credit
+credit-form
 ==================*/
 
-section.credit {
+section.credit-form {
    width: 100%;
 }
 
@@ -135,7 +135,7 @@ form select {
 }
 
 @media (max-width: 800px) {
-   section.credit .container {
+   section.credit-form .container {
       height: 100%;
       padding: 1rem;
       justify-content: center;

@@ -4,6 +4,7 @@ import ServicesRoutesPrivate from "./RoutesPrivate";
 
 import {
   MainPage,
+  Credit,
   CreditFormPage,
   SigninPage,
   NotFoundPage,
@@ -27,11 +28,9 @@ const ServicesRoutes = (props) => {
         render={(props) => <SigninPage {...props} isLogged={isLogged} />}
       />
 
-      <ServicesRoutesPrivate
-        path="/main"
-        component={MainPage}
-        isLogged={isLogged}
-      />
+      <ServicesRoutesPrivate path="/main" component={MainPage} />
+
+      <ServicesRoutesPrivate path="/credit/:id" component={Credit} />
 
       <Route path="*" component={NotFoundPage} />
     </Switch>

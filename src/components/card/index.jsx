@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./card.css";
 
@@ -7,7 +8,7 @@ import ShowDetails from "../Modal/ShowDetails";
 
 const Card = (props) => {
   const {
-    // _id,
+    _id,
     fullName,
     email,
     phone,
@@ -17,7 +18,7 @@ const Card = (props) => {
     // address,
     deviceSpecification,
     // bankDetails,
-    creditAccepted,
+    // creditAccepted,
   } = props.data;
 
   const [openModal, setOpenModal] = useState(false);
@@ -56,13 +57,9 @@ const Card = (props) => {
               Preview
             </button>
 
-            <button
-              type="button"
-              className="credit-card__link"
-              onClick={openShowMessageModal}
-            >
+            <Link to={`/credit/${_id}`} className="credit-card__link">
               Abrir Proposta
-            </button>
+            </Link>
 
             <button
               type="button"

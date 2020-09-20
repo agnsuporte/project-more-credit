@@ -3,7 +3,7 @@ import React from "react";
 import "./show-details.css";
 
 const ShowDetails = (props) => {
-  const { title, message, onClickClose, data } = props;
+  const { onClickClose, data } = props;
 
   return (
     <div className="detail-modal">

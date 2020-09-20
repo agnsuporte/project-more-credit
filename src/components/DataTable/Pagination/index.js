@@ -40,7 +40,7 @@ const PaginationComponent = ({
     // }
 
     return pages;
-  }, [totalPages, currentPage, onPageChange]);
+  }, [totalPages, currentPage]); //onPageChange
 
   if (totalPages === 0) return null;
 

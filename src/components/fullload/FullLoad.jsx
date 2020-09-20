@@ -7,7 +7,10 @@ import "./fullload.css";
 const FullLoad = () => {
   return (
     <div className="fp-container">
-      <img src={Spinner} className="fp-loader" alt="loading" />
+      <div className="fp-loader">
+        <img src={Spinner} width="80px" height="80px" alt="loading" />
+        <p>Aguarde...</p>
+      </div>
     </div>
   );
 };

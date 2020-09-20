@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { setToken } from "../../services/auth";
 import getSignin from "../../services/signin";
+import { Modal } from "../../components";
 
 import "./signin.css";
 
@@ -15,6 +16,10 @@ function PageSignin(props) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [openMessageModal, setOpenMessageModal] = useState(false);
+
+  const openShowMessageModal = () => setOpenMessageModal(true);
+  const openCloseMessageModal = () => setOpenMessageModal(false);
 
   const { isLogged, location } = props;
 
@@ -110,13 +115,39 @@ function PageSignin(props) {
             </li>
             <li>Are you new here?</li>
             <li>
-              <Link to="/login" className="button__login secondary text-center">
+              <button
+                type="button"
+                onClick={openShowMessageModal}
+                className="button__login secondary text-center"
+              >
                 Crie sua conta!
-              </Link>
+              </button>
             </li>
           </ul>
         </form>
       </div>
+      <Modal
+        isOpen={Boolean(openMessageModal)}
+        onClickClose={openCloseMessageModal}
+      >
+        <h2 className="message-modal__title">
+          Muito obrigado por esta oportunidade!
+        </h2>
+
+        <div className="message-motal__text">
+          <p>Este recurso não está disponível</p>
+        </div>
+
+        <div className="message-modal-buttons">
+          <button
+            type="button"
+            className="message-modal__button"
+            onClick={openCloseMessageModal}
+          >
+            Ok, Obrigado!
+          </button>
+        </div>
+      </Modal>
     </section>
   );
 }

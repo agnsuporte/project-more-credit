@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Redirect } from "react-router-dom";
 import api from "../../services/api";
 import { Pagination, Search } from "../../components/DataTable";
 import { Card, FullLoad } from "../../components";

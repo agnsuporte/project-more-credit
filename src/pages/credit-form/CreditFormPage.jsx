@@ -7,6 +7,7 @@ import ShowMessage from "../../components/Modal/ShowMessage";
 import Loagin from "../../components/Modal/Loading";
 import Upload from "../../components/upload/Upload";
 import Preview from "../../components/upload/Previewer";
+import FieldInput from "./FieldInput";
 
 import api from "../../services/api";
 
@@ -114,7 +115,7 @@ const PageCreditForm = () => {
   };
 
   return (
-    <section className="credit">
+    <section className="credit-form">
       <div className="container">
         <form
           onSubmit={handleSubmit}
@@ -127,117 +128,63 @@ const PageCreditForm = () => {
             </legend>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="fullName">Nome Completo</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  onChange={handleChange}
-                  autoFocus
-                  required
-                />
-              </div>
+              <FieldInput
+                name="fullName"
+                onChange={handleChange}
+                label="Nome Completo"
+              />
 
-              <div className="field">
-                <label htmlFor="dateOfBirth">Data de Nascimento</label>
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                type="date"
+                name="dateOfBirth"
+                onChange={handleChange}
+                label="Data de Nascimento"
+              />
             </div>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="email">E-mail</label>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                type="email"
+                name="email"
+                onChange={handleChange}
+                label="E-mail"
+              />
 
-              <div className="field">
-                <label htmlFor="socialNetwork">
-                  Instagram (@NomeUsuario) / Facebook
-                </label>
-                <input
-                  type="text"
-                  name="socialNetwork"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="socialNetwork"
+                onChange={handleChange}
+                label="Instagram (@NomeUsuario) / Facebook"
+              />
             </div>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="streetOrAvenue">Endereço</label>
-                <input
-                  type="text"
-                  name="streetOrAvenue"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="streetOrAvenue"
+                onChange={handleChange}
+                label="Endereço"
+              />
             </div>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="city">Cidade</label>
-                <input
-                  type="text"
-                  name="city"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput name="city" onChange={handleChange} label="Cidade" />
 
-              <div className="field">
-                <label htmlFor="state">Estado</label>
-                <input
-                  type="text"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput name="state" onChange={handleChange} label="Estado" />
             </div>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="zipCode">Código Postal</label>
-                <input
-                  type="text"
-                  name="zipCode"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="zipCode"
+                onChange={handleChange}
+                label="Código Postal"
+              />
 
-              <div className="field">
-                <label htmlFor="country">País</label>
-                <input
-                  type="text"
-                  name="country"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput name="country" onChange={handleChange} label="País" />
 
-              <div className="field">
-                <label htmlFor="phone">Número Celular</label>
-                <input
-                  type="text"
-                  name="phone"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="phone"
+                onChange={handleChange}
+                label="Número Celular"
+              />
             </div>
           </fieldset>
 
@@ -247,25 +194,25 @@ const PageCreditForm = () => {
             </legend>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="rg">RG</label>
-                <input type="text" name="rg" onChange={handleChange} />
-              </div>
+              <FieldInput
+                name="rg"
+                onChange={handleChange}
+                label="RG"
+                required={false}
+              />
 
-              <div className="field">
-                <label htmlFor="cpf">CPF</label>
-                <input type="text" name="cpf" onChange={handleChange} />
-              </div>
+              <FieldInput
+                name="cpf"
+                onChange={handleChange}
+                label="CPF"
+                required={false}
+              />
 
-              <div className="field">
-                <label htmlFor="passportNumber">Passaporte</label>
-                <input
-                  type="text"
-                  name="passportNumber"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="passportNumber"
+                onChange={handleChange}
+                label="Passaporte"
+              />
             </div>
 
             <div className="field-group">
@@ -282,15 +229,6 @@ const PageCreditForm = () => {
                 {values.imagePassportOrRg && (
                   <Preview files={values.imagePassportOrRg} />
                 )}
-
-                {/* <input
-                  className="upload-photo"
-                  type="file"
-                  name="imagePassportOrRg"
-                  accept="image/png, image/jpeg"
-                  onChange={handleChange}
-                  required
-                /> */}
               </div>
               <div className="field">
                 <label htmlFor="selfieWithPassportURL">
@@ -302,7 +240,6 @@ const PageCreditForm = () => {
                   name="selfieWithPassportURL"
                   required={true}
                 />
-
                 {values.imageSelfieWithPassport && (
                   <Preview files={values.imageSelfieWithPassport} />
                 )}
@@ -316,33 +253,23 @@ const PageCreditForm = () => {
             </legend>
 
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="deviceName">Qual produto será adquirido?</label>
-                <input
-                  type="text"
-                  name="deviceName"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="inputValue">Valor da Entrada</label>
-                <input
-                  type="text"
-                  name="inputValue"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="numberOfWeeks">Em quantas semanas?</label>
-                <input
-                  type="text"
-                  name="numberOfWeeks"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="deviceName"
+                onChange={handleChange}
+                label="Qual produto será adquirido?"
+              />
+
+              <FieldInput
+                name="inputValue"
+                onChange={handleChange}
+                label="Valor da Entrada"
+              />
+
+              <FieldInput
+                name="numberOfWeeks"
+                onChange={handleChange}
+                label="Em quantas semanas?"
+              />
             </div>
           </fieldset>
 
@@ -351,33 +278,23 @@ const PageCreditForm = () => {
               <h2>Informações Bancária</h2>
             </legend>
             <div className="field-group">
-              <div className="field">
-                <label htmlFor="ownersAccountName">Titular da Conta</label>
-                <input
-                  type="text"
-                  name="ownersAccountName"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="numberAccount">Número de Conta</label>
-                <input
-                  type="text"
-                  name="numberAccount"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="sortCodeAccount">Sort Code</label>
-                <input
-                  type="text"
-                  name="sortCodeAccount"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <FieldInput
+                name="ownersAccountName"
+                onChange={handleChange}
+                label="Titular da Conta"
+              />
+
+              <FieldInput
+                name="numberAccount"
+                onChange={handleChange}
+                label="Número de Conta"
+              />
+
+              <FieldInput
+                name="sortCodeAccount"
+                onChange={handleChange}
+                label="Sort Code"
+              />
             </div>
           </fieldset>
 

@@ -1,0 +1,54 @@
+/*=============== 
+MAIN
+==================*/
+
+#credit {
+  width: 100%;
+  height: 100%;
+  padding: 30px 50px;
+  position: relative;
+
+  font-size: 14px;
+}
+
+.credit-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  margin-bottom: 6rem;
+  padding: 4rem 1rem;
+
+  background-color: rgb(255, 255, 255);
+}
+
+hr {
+  width: 100%;
+  margin-bottom: 12px;
+  margin-top: 8px;
+}
+
+.credit-info {
+  width: 98%;
+  padding: 10px;
+
+  font-size: 14px;
+}
+
+.credit-info .title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.contex {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contex img {
+  width: 200px;
+  height: 200px;
+}

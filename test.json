@@ -1,0 +1,49 @@
+"personalDocuments": {
+  "pictureSelfieWithPassport": {
+    "originalname": "self-homem-mostra-passaporte-03.jpeg",
+    "mimetype": "image/jpeg",
+    "size": "8508",
+    "key": "7e69ec15ef028053ef336da35e46248a-self-homem-mostra-passaporte-03.jpeg",
+    "location": "https://filesfornetmore.s3.eu-west-2.amazonaws.com/7e69ec15ef028053ef336da35e46248a-self-homem-mostra-passaporte-03.jpeg"
+  },
+  "picturePassportOrRg": {
+    "originalname": "passaporte-italia.jpeg",
+    "mimetype": "image/jpeg",
+    "size": "127721",
+    "key": "60c1f205e5cac6a05db932482a332b9d-passaporte-italia.jpeg",
+    "location": "https://filesfornetmore.s3.eu-west-2.amazonaws.com/60c1f205e5cac6a05db932482a332b9d-passaporte-italia.jpeg"
+  },
+  "rg": "365254",
+  "cpf": "123.123.123-00",
+  "passportNumber": "PST-1234"
+},
+"deviceSpecification": {
+  "diviceURL": "https://static.fnac-static.com/multimedia/Images/PT/NR/07/82/17/1540615/1540-1.jpg",
+  "numberOfWeeks": {
+    "$numberInt": "40"
+  },
+  "deviceName": "iPhone 11 Pro",
+  "inputValue": "200"
+},
+"creditAccepted": false,
+"fullName": "Zezu dos Teclados",
+"email": "zezu@gmail.com",
+"phone": "+55 85 9568-3652",
+"dateOfBirth": {
+  "$date": {
+    "$numberLong": "-4236537600000"
+  }
+},
+"socialNetwork": "@zezugmail",
+"address": {
+  "streetOrAvenue": "Rua do Brega, 2020",
+  "city": "Noite Clara",
+  "state": "Casa Show",
+  "zipCode": "2543-507",
+  "country": "Portugal"
+},
+"bankDetails": {
+  "ownersAccountName": "O PRÓPRIO",
+  "numberAccount": "9876543210",
+  "sortCodeAccount": "123"
+}

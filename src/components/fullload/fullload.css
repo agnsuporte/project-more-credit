@@ -11,5 +11,7 @@
   top: 40%;
   left: 45%;
   z-index: 1000;
+  text-align: center;
+  font-size: 14px;
   position: absolute;
 }
