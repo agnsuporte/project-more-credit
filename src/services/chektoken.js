@@ -1,14 +1,16 @@
 import api from "./api";
+// import { getToken } from "./auth";
 
-const getChekToken = async (token) => {
+const getChekToken = async () => {
+  // const token = getToken();
   const URL = "/api/v1/user/token";
   const result = await api
     .get(URL)
     .then((resp) => {
       if (resp.data.err) {
-        return false;
+        return { err: 1, message: resp.data.message };
       }
-      return true;
+      return { err: 0, message: "[ChekToken] Validated Token" };
     })
     .catch((err) => {
       console.log("@GnErr =--> ", err);

@@ -4,7 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 
 const ServicesRoutesPrivate = ({ component: Component, ...rest }) => {
-  let authenticated = isAuthenticated();
+  const authenticated = isAuthenticated();
 
   return (
     <Route

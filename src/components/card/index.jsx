@@ -83,6 +83,7 @@ const Card = (props) => {
           </div>
         </footer>
       </div>
+
       <Modal isOpen={Boolean(openModal)} onClickClose={onClickCloseModal}>
         <ShowDetails
           data={props.data}

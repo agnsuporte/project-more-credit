@@ -124,3 +124,74 @@
 .message-modal__button:hover {
    opacity: 0.8;
 }
+
+@media (max-width: 850px) {
+   .credit-card__email {
+      display: none;
+   }
+}
+
+@media (max-width: 800px) {
+   .credit-card,
+   .credit-card__info,
+   .credit-card__title,
+   .credit-card__footer,
+   .credit-card__actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .credit-card__image {
+      margin-bottom: 20px;
+   }
+
+   .credit-card img {
+      display: block;
+   }
+
+   .credit-card__title {
+      width: 100%;
+   }
+
+   .credit-card__title h2,
+   .credit-card__phone,
+   .col50 {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+   }
+
+   .credit-card__title h2 {
+      font-size: 1.6rem;
+   }
+
+   .credit-card__phone {
+      font-size: 2rem;
+   }
+
+   .credit-card__footer {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 5px;
+   }
+
+   .credit-card__email {
+      margin-bottom: 10px;
+   }
+
+   .credit-card__actions {
+      margin: unset;
+      width: 100%;
+   }
+
+   .credit-card__actions a {
+      text-align: center;
+   }
+
+   .credit-card__link {
+      width: 100%;
+      margin: unset;
+      margin-bottom: 10px;
+   }
+}

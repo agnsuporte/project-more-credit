@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { parseISO, format, formatRelative, formatDistance } from "date-fns";
+
+import { parseISO, format } from "date-fns";
 
 import { FullLoad } from "../../components";
 import getProposal from "../../services/proposal";
+import Modal from "../../components/Modal/Modal";
+
+import getChekToken from "../../services/chektoken";
+import { logout } from "../../services/auth";
 
 import "./credit.css";
 
@@ -14,10 +19,26 @@ const Credit = (props) => {
   const [loader, setLoader] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [values, setValues] = useState({});
+  // const [openModal, setOpenModal] = useState(false);
+
+  const [openMessageModal, setOpenMessageModal] = useState(false);
+
+  const openShowMessageModal = () => setOpenMessageModal(true);
+  const openCloseMessageModal = () => setOpenMessageModal(false);
+
   useEffect(() => {
+    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjYxMjBlODQ2OTk5MzY4NTZlZjY5MjUiLCJuYW1lIjoiQW5hIE1hcmlhIiwiZW1haWwiOiJhbmFtYXJpYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2MDA2MDM1MjEsImV4cCI6MTYwMDYxMDcyMX0.yel3MQsRQENe8NWtB-CK0CzgHjG4zdn--4s1PPVo5Jk
     window.scrollTo(0, 0);
 
     const getData = async () => {
+      // -----
+      const token = await getChekToken();
+
+      if (token.err) {
+        logout();
+      }
+
       const data = await getProposal(creditURL);
 
       if (!data.err) {
@@ -58,6 +79,21 @@ const Credit = (props) => {
     return null;
   }
 
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = { ...values, _id: proposal._id };
+
+    openShowMessageModal();
+
+    return null && data;
+  };
+
   return (
     <section id="credit" className="credit">
       <div className="credit-container">
@@ -71,15 +107,16 @@ const Credit = (props) => {
               {format(parseISO(proposal.dateOfBirth), "dd/MM/yyyy")}
               <br />
               <br />
+              <strong>Telefone: </strong>
+              {proposal.phone}
+              <br />
               <strong>E-mail: </strong>
               {proposal.email}
               <br />
               <strong>Rede Social: </strong>
               {proposal.socialNetwork}
               <br />
-              <strong>Telefone: </strong>
-              {proposal.phone}
-              <br /> <br /> <br />
+              <br /> <br />
               <strong>Endereço: </strong>
               {proposal.address.streetOrAvenue}
               <br />
@@ -112,7 +149,7 @@ const Credit = (props) => {
           <h1 className="title">Documentação</h1>
 
           <div className="contex">
-            <article className="bloco-endereco">
+            <article className="bloco-documentos">
               <strong>RG: </strong>
               {proposal.personalDocuments.rg}
               <br />
@@ -146,7 +183,7 @@ const Credit = (props) => {
           <h1 className="title">Objeto de Interesse</h1>
 
           <div className="contex">
-            <article className="bloco-endereco">
+            <article className="bloco-produto">
               <strong>Descrição do Produto: </strong>
               <br /> <br />
               {proposal.deviceSpecification.deviceName}
@@ -159,10 +196,12 @@ const Credit = (props) => {
               <br />
             </article>
 
-            <img
-              src={proposal.deviceSpecification.diviceURL}
-              alt={proposal.fullName}
-            />
+            {proposal.deviceSpecification.diviceURL !== "undefined" && (
+              <img
+                src={proposal.deviceSpecification.diviceURL}
+                alt={proposal.fullName}
+              />
+            )}
           </div>
         </div>
 
@@ -172,7 +211,7 @@ const Credit = (props) => {
           <h1 className="title">Responder</h1>
 
           <div className="contex">
-            <article className="bloco-endereco">
+            <article className="bloco-proposta">
               <strong>Data de Envio: </strong>
               {format(parseISO(proposal.createAt), "dd/MM/yyyy")}
               <br /> <br />
@@ -183,56 +222,87 @@ const Credit = (props) => {
           </div>
 
           <div className="contex">
-            <div className="form">
-              <form>
-                <ul className="form-container__login">
-                  <li>
-                    <h2>Login</h2>
-                  </li>
-                  <li className="message">
-                    {/* {loading && <div>Loading...</div>}
-                    {message && <div>{message}</div>} */}
-                  </li>
-                  <li>
-                    <div className="field-group__login">
-                      <div className="field__login">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email"></input>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="field-group__login">
-                      <div className="field__login">
-                        <label htmlFor="password">Password</label>
-                        <input
-                          type="password"
-                          id="password"
-                          name="password"
-                        ></input>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <button type="submit" className="button__login primary">
-                      Entrar
-                    </button>
-                  </li>
-                  <li>Are you new here?</li>
-                  <li>
-                    <button
-                      type="button"
-                      className="button__login secondary text-center"
+            <form
+              onSubmit={handleSubmit}
+              id="proposal-form-response"
+              method="POST"
+            >
+              <fieldset>
+                <div className="field-group">
+                  <div className="field">
+                    <label htmlFor="creditAccepted">Aceitar proposta?</label>
+                    <select
+                      name="creditAccepted"
+                      id="creditAccepted"
+                      onChange={handleChange}
+                      required
                     >
-                      Crie sua conta!
+                      <option value="">Selecione uma opção</option>
+                      <option value={true}>Aceitar</option>
+                      <option value={false}>Recusar</option>
+                    </select>
+                  </div>
+
+                  <div className="field">
+                    <label htmlFor="collectionDate">Data de Recolha</label>
+                    <input
+                      type="date"
+                      id="collectionDate"
+                      name="collectionDate"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <div className="field">
+                    <label htmlFor="message">Mensagem</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="10"
+                      onChange={handleChange}
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <div className="field-group">
+                  {!loader && (
+                    <button type="submit" className="button" disabled={loader}>
+                      Concluir Proposta
                     </button>
-                  </li>
-                </ul>
-              </form>
-            </div>
+                  )}
+                </div>
+              </fieldset>
+            </form>
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={Boolean(openMessageModal)}
+        onClickClose={openCloseMessageModal}
+      >
+        <h2 className="message-modal__title">
+          Muito obrigado por esta oportunidade!
+        </h2>
+
+        <div className="message-motal__text">
+          <p>Este recurso não está disponível</p>
+        </div>
+
+        <div className="message-modal-buttons">
+          <button
+            type="button"
+            className="message-modal__button"
+            onClick={openCloseMessageModal}
+          >
+            Ok, Obrigado!
+          </button>
+        </div>
+      </Modal>
     </section>
   );
 };

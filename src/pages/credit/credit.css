@@ -52,3 +52,140 @@ hr {
   width: 200px;
   height: 200px;
 }
+
+section.credit-form {
+  width: 100%;
+}
+
+.contex form {
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  padding: 2rem 3.3rem; /*preenchimento*/
+  margin: 30px;
+  border-radius: 8px;
+}
+
+.contex form h1 {
+  font-size: 36px;
+}
+
+.contex form fieldset {
+  margin-top: 0px;
+  border: 0;
+}
+
+.contex form legend span {
+  font-size: 14px;
+  color: blue;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.field-group {
+  display: flex;
+}
+
+.contex form input,
+form textarea,
+form select {
+  background-color: #f0f0f5;
+  border: 0;
+  padding: 12px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.contex form input:focus,
+form textarea:focus,
+form select:focus {
+  border: 1px solid #88bbeb;
+  box-shadow: 0 0 0 0.2rem rgba(95, 80, 114, 0.25);
+}
+
+.contex form select {
+  -webkit-appearence: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.contex form label {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.field-group .field + .field {
+  margin-left: 24px;
+}
+
+.button {
+  flex: 1;
+  color: white;
+  text-decoration: none;
+  padding: 19px 0px;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: darkcyan;
+  border-radius: 8px;
+  border: 0;
+  transition: background-color 400ms;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.field-group .button + .button {
+  margin-left: 24px;
+}
+
+.contex form button:hover {
+  background-color: #0380f5;
+}
+
+@media (max-width: 600px) {
+  .contex form {
+    width: 100%;
+    margin: 10px;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .contex {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .contex img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 800px) {
+  section.credit-form .contex {
+    height: 100%;
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .field-group {
+    flex-direction: column;
+  }
+
+  .field-group .field + .field {
+    margin-left: 0;
+  }
+
+  .field-group .button + .button {
+    margin-left: 0;
+    margin-top: 3rem;
+  }
+}

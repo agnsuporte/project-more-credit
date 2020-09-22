@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import api from "../../services/api";
+import getChekToken from "../../services/chektoken";
+import { logout } from "../../services/auth";
 import { Pagination, Search } from "../../components/DataTable";
 import { Card, FullLoad } from "../../components";
 
@@ -16,8 +18,17 @@ const MainPage = (props) => {
   const ITEMS_PER_PAGE = 5;
 
   useEffect(() => {
+    // ---
     setLoader(true);
+
     const getData = async () => {
+      // ---
+      const token = await getChekToken();
+
+      if (token.err) {
+        logout();
+      }
+
       await api
         .get("/api/v1/cred")
         .then((resp) => {
