@@ -42,7 +42,14 @@
 @media (max-width: 600px) {
   .pagination {
     width: 100%;
-    margin-top: 15px;
     justify-content: space-between;
+  }
+
+  .pagination .pages {
+    font-size: 16px;
+  }
+
+  .pagination .item {
+    font-size: 16px;
   }
 }

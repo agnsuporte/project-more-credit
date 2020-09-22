@@ -20,7 +20,7 @@ const PaginationComponent = ({
     const pages = [];
 
     pages.push(
-      <span className={"pages"} key="01xyz-54">
+      <span className="pages" key="01xyz-54">
         Pag. {currentPage} de {totalPages}
       </span>
     );

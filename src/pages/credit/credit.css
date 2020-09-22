@@ -147,8 +147,24 @@ form select:focus {
   background-color: #0380f5;
 }
 
+.bloco-endereco {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 @media (max-width: 600px) {
-  .contex form {
+  #credit {
+    padding: 3px 5px;
+  }
+
+  .credit-container {
+    padding: 0.5rem 1rem;
+  }
+
+  .contex form,
+  article {
     width: 100%;
     margin: 10px;
   }
@@ -167,6 +183,10 @@ form select:focus {
     height: 150px;
     margin-bottom: 15px;
   }
+
+  .button {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 800px) {
@@ -174,6 +194,10 @@ form select:focus {
     height: 100%;
     padding: 1rem;
     justify-content: center;
+  }
+
+  .contex form {
+    padding: 0px 0px;
   }
 
   .field-group {

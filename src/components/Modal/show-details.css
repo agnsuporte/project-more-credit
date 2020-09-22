@@ -55,7 +55,7 @@ section.show-details {
 }
 
 .foto {
-  width: 35%;
+  width: 40%;
   height: 270px;
 
   background-repeat: no-repeat;
@@ -65,4 +65,24 @@ section.show-details {
 
 .bloco-endereco {
   margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .detail-modal__title {
+    font-size: 2rem;
+  }
+
+  .detail-text {
+    width: 100%;
+  }
+
+  .foto {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .foto {
+    width: 45%;
+  }
 }
